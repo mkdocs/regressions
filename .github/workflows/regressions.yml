@@ -251,7 +251,7 @@ jobs:
       run: bash build.sh one ${{ matrix.repo }}
 
     - name: Archive logs
-        uses: actions/upload-artifact@v2
-        with:
-          name: logs-${{ matrix.repo }}
-          path: logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: logs-${{ matrix.repo }}
+        path: logs
