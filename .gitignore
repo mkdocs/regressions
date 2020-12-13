@@ -1,0 +1,6 @@
+venv/
+.venv/
+repos/
+logs/
+results.log
+mkdocstrings
