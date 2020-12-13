@@ -1,0 +1,9 @@
+markdown_blockdiag: markdown-blockdiag
+markdown_include: markdown-include
+markdown_inline_graphviz: markdown-inline-graphviz
+mdx_include: mdx-include
+mdx_math: python-markdown-math
+mdx_truly_sane_lists: mdx-truly-sane-lists
+mkdocs-click: mkdocs-click
+mkpatcher: mkpatcher
+pymdownx: pymdown-extensions
