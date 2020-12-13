@@ -36,6 +36,7 @@ jobs:
         - DataDog/integrations-core
 
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     steps:
     - name: Checkout
