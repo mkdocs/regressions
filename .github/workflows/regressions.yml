@@ -34,6 +34,46 @@ jobs:
         - salesforce/cloudsplaining
         - deepcharles/ruptures
         - DataDog/integrations-core
+        - MaartenGr/BERTopic
+        - damiafuentes/DJITelloPy
+        - damiafuentes/DJITelloPy
+        - pawamoy/mkdocstrings
+        - koaning/human-learn
+        - MaartenGr/KeyBERT
+        - MaartenGr/PolyFuzz
+        - RasaHQ/whatlies
+        - pawamoy/aria2p
+        - copier-org/copier
+        - poets-ai/elegy
+        - cs01/pygdbmi
+        - TheHive-Project/TheHive4py
+        - sleuth-io/code-video-generator
+        - aparcar/asu
+        - kelvindecosta/picharsso
+        - pawamoy/shell-history
+        - daxartio/tinvest
+        - suned/pfun
+        - coady/multimethod
+        - hSaria/ChromaTerm
+        - basedosdados/mais
+        - pyomeca/pyomeca
+        - abdullahselek/HerePy
+        - koaning/clumper
+        - Servir-Mekong/hydra-floods
+        - coady/django-model-values
+        - phurwicz/hover
+        - abdullahselek/authenticatorpy
+        - JosXa/tgintegration
+        - up42/up42-py
+        - voidful/TFkit
+        - tjltjl/plycutter
+        - sinaahmadi/klpt
+        - 173TECH/sayn
+        - pawamoy/git-changelog
+        - verifid/facereg
+        - abdullahselek/spampy
+        - openkinome/kinoml
+        - ppsp-team/HyPyP
 
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -58,9 +98,3 @@ jobs:
 
     - name: Check for regressions
       run: bash build.sh one ${{ matrix.repo }}
-
-    - name: Archive logs
-      uses: actions/upload-artifact@v2
-      with:
-        name: logs-${{ matrix.repo }}
-        path: logs

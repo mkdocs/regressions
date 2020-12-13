@@ -77,7 +77,7 @@ do_one() {
     msg "installing self"
     install_self $d
     msg "building current"
-    ! build_current $d && { [ -n "$CI" ] && return 0 || return 1; }
+    ! build_current $d && return 1
     msg "building latest"
     upgrade_mkdocstrings $d
     ! build_latest $d && return 2
