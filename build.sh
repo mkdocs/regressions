@@ -28,10 +28,10 @@ install_deps() {
     grep -q material repos/$1/mkdocs.yml && repos/$1/venv/bin/python -m pip install mkdocs-material
 
     # plugins
-    plugins=$(python get_plugins_packages.py repos/$1)
+    plugins=$(repos/$1/venv/bin/python get_plugins_packages.py repos/$1)
     
     # extensions
-    extensions=$(python get_extensions_packages.py repos/$1)
+    extensions=$(repos/$1/venv/bin/python get_extensions_packages.py repos/$1)
 
     # install
     repos/$1/venv/bin/python -m pip install $plugins $extensions
@@ -47,7 +47,7 @@ build_current() {
 
 upgrade_mkdocstrings() {
     repos/$1/venv/bin/python -m pip uninstall -y mkdocstrings
-    [ ! -e ./mkdocstrings ] && git clone https://github.com/pawamoy/mkdocstrings
+    [ ! -e ./mkdocstrings ] && git clone https://github.com/pawamoy/mkdocstrings --depth=1
     repos/$1/venv/bin/python -m pip install ./mkdocstrings
 }
 
