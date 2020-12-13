@@ -42,7 +42,7 @@ install_self() {
 }
 
 build_current() {
-    (cd repos/$1; venv/bin/mkdocs build -d site_current)
+    (cd repos/$1; venv/bin/mkdocs build -v -d site_current)
 }
 
 upgrade_mkdocstrings() {
@@ -52,7 +52,7 @@ upgrade_mkdocstrings() {
 }
 
 build_latest() {
-    (cd repos/$1; venv/bin/mkdocs build -d site_latest)
+    (cd repos/$1; venv/bin/mkdocs build -v -d site_latest)
 }
 
 msg() {
