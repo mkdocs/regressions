@@ -76,7 +76,6 @@ jobs:
         - ppsp-team/HyPyP
 
     runs-on: ubuntu-latest
-    continue-on-error: true
 
     steps:
     - name: Checkout
@@ -96,5 +95,11 @@ jobs:
         path: repos
         key: repo-${{ matrix.repo }}
 
-    - name: Check for regressions
-      run: bash build.sh one ${{ matrix.repo }}
+    - name: Build current version
+      id: build_current
+      run: bash build.sh one_current ${{ matrix.repo }}
+      continue-on-error: true
+
+    - name: Build latest version
+      run: bash build.sh one_latest ${{ matrix.repo }}
+      if: ${{ steps.build_current.outcome == "success" }}

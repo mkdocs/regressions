@@ -66,18 +66,23 @@ msg() {
 }
 
 do_one() {
-    msg "cloning"
-    d=$(clone $1)
-    msg "making venv"
-    make_venv $d
-    msg "installing mkdocs"
-    install_mkdocs $d
-    msg "installing deps"
-    install_deps $d
-    msg "installing self"
-    install_self $d
-    msg "building current"
-    ! build_current $d && return 1
+    if [ $RESUME_AT_LATEST -eq 0 ]; then
+        msg "cloning"
+        d=$(clone $1)
+        msg "making venv"
+        make_venv $d
+        msg "installing mkdocs"
+        install_mkdocs $d
+        msg "installing deps"
+        install_deps $d
+        msg "installing self"
+        install_self $d
+        msg "building current"
+        ! build_current $d && return 1
+        [ $STOP_AT_CURRENT -eq 1 ] && return 0
+    else
+        d=${1/\//-}
+    fi
     msg "building latest"
     upgrade_mkdocstrings $d
     ! build_latest $d && return 2
@@ -98,8 +103,12 @@ do_all() {
 }
 
 main() {
+    STOP_AT_CURRENT=0
+    RESUME_AT_LATEST=0
     case $1 in
         one) do_one $2 ;;
+        one_current) STOP_AT_CURRENT=1; do_one $2 ;;
+        one_latest) RESUME_AT_LATEST=1; do_one $2 ;;
         one_silent) do_one_silent $2 ;;
         all) do_all ;;
     esac
