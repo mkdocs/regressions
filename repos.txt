@@ -2,7 +2,6 @@ arogozhnikov/einops
 abhiTronix/vidgear
 jmoiron/humanize
 cgarciae/pypeln
-cgarciae/pypeln
 salesforce/policy_sentry
 archivy/archivy
 giswqs/geemap
