@@ -102,4 +102,4 @@ jobs:
 
     - name: Build latest version
       run: bash build.sh one_latest ${{ matrix.repo }}
-      if: ${{ steps.build_current.outcome == "success" }}
+      if: ${{ steps.build_current.outcome == 'success' }}
