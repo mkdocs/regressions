@@ -11,12 +11,10 @@ DataDog/integrations-core
 MaartenGr/BERTopic
 damiafuentes/DJITelloPy
 damiafuentes/DJITelloPy
-pawamoy/mkdocstrings
 koaning/human-learn
 MaartenGr/KeyBERT
 MaartenGr/PolyFuzz
 RasaHQ/whatlies
-pawamoy/aria2p
 copier-org/copier
 poets-ai/elegy
 cs01/pygdbmi
@@ -24,7 +22,6 @@ TheHive-Project/TheHive4py
 sleuth-io/code-video-generator
 aparcar/asu
 kelvindecosta/picharsso
-pawamoy/shell-history
 daxartio/tinvest
 suned/pfun
 coady/multimethod
@@ -43,7 +40,6 @@ voidful/TFkit
 tjltjl/plycutter
 sinaahmadi/klpt
 173TECH/sayn
-pawamoy/git-changelog
 verifid/facereg
 abdullahselek/spampy
 openkinome/kinoml

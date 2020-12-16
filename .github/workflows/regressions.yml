@@ -37,12 +37,10 @@ jobs:
         - MaartenGr/BERTopic
         - damiafuentes/DJITelloPy
         - damiafuentes/DJITelloPy
-        - pawamoy/mkdocstrings
         - koaning/human-learn
         - MaartenGr/KeyBERT
         - MaartenGr/PolyFuzz
         - RasaHQ/whatlies
-        - pawamoy/aria2p
         - copier-org/copier
         - poets-ai/elegy
         - cs01/pygdbmi
@@ -50,7 +48,6 @@ jobs:
         - sleuth-io/code-video-generator
         - aparcar/asu
         - kelvindecosta/picharsso
-        - pawamoy/shell-history
         - daxartio/tinvest
         - suned/pfun
         - coady/multimethod
@@ -69,7 +66,6 @@ jobs:
         - tjltjl/plycutter
         - sinaahmadi/klpt
         - 173TECH/sayn
-        - pawamoy/git-changelog
         - verifid/facereg
         - abdullahselek/spampy
         - openkinome/kinoml
