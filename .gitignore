@@ -5,3 +5,4 @@ logs/
 results.log
 mkdocstrings
 diff-*.txt
+.python-version
