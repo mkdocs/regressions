@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set +e
 set -o pipefail
 mkdir -p logs
 mkdir -p repos
@@ -77,11 +78,16 @@ do_diff() {
             -X exclude_patterns.txt \
             -B --suppress-blank-empty \
             --suppress-common-lines \
-            -r repos/$1/site_current repos/$1/site_latest | \
-                grep -v '^Build Date UTC :' 
+            -U0 -w -r repos/$1/site_current repos/$1/site_latest
     )"
     echo "${diff_output}"
-    [ -n "${diff_output}" ] && return 1
+    if [ -n "$(grep -Ev \
+                -e '^[^+-]' \
+                -e '^[+-] Build Date UTC :' \
+                -e '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}' \
+                -e '0x[a-f0-9]+' <<<"${diff_output}")" ]; then
+        return 1
+    fi
     return 0
 }
 
@@ -122,7 +128,7 @@ do_one() {
     msg "prettifying"
     prettify_dir $d site_latest
     msg "diffing"
-    ! do_diff $d | tee diff-$d.txt && return 2
+    ! do_diff $d | tee diff-$d.diff && return 2
     return 0
 }
 
@@ -136,7 +142,7 @@ do_one_silent() {
 }
 
 do_all() {
-    cat repos.txt | parallel --bar bash build.sh one_silent {}
+    cat repos.txt | parallel bash build.sh one_silent {}
 }
 
 main() {

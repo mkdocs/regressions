@@ -85,11 +85,11 @@ jobs:
     - name: Install PyYAML
       run: python -m pip install --user pyyaml beautifulsoup4
 
-    - name: Set up the cache
-      uses: actions/cache@v1
-      with:
-        path: repos
-        key: repo-${{ matrix.repo }}
+    #- name: Set up the cache
+    #  uses: actions/cache@v1
+    #  with:
+    #    path: repos
+    #    key: repo-${{ matrix.repo }}
 
     - name: Build current version
       id: build_current

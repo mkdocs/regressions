@@ -4,5 +4,6 @@ repos/
 logs/
 results.log
 mkdocstrings
-diff-*.txt
+diff-*
 .python-version
+token.txt
