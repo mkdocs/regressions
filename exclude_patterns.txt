@@ -1,0 +1,2 @@
+sitemap.xml.gz
+search_index.json

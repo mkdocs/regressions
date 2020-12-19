@@ -41,6 +41,22 @@ install_self() {
     (cd repos/$1; venv/bin/python -m pip install .)
 }
 
+prettify_file() {
+    if [ -d venv ]; then
+        python=venv/bin/python
+    else
+        python=python
+    fi
+    prettified="$($python -c "import bs4, sys, pathlib; print(bs4.BeautifulSoup(pathlib.Path('$1').read_text()).prettify())")"
+    echo "${prettified}" > "$1"
+}
+
+prettify_dir() {
+    find repos/$1/$2 -name "*.html" | while read -r html_file; do
+        prettify_file "${html_file}"
+    done
+}
+
 build_current() {
     (cd repos/$1; venv/bin/mkdocs build -v -d site_current)
 }
@@ -53,6 +69,10 @@ upgrade_mkdocstrings() {
 
 build_latest() {
     (cd repos/$1; venv/bin/mkdocs build -v -d site_latest)
+}
+
+do_diff() {
+    diff -X exclude_patterns.txt --suppress-common-lines -r repos/$1/site_current repos/$1/site_latest
 }
 
 msg() {
@@ -79,13 +99,20 @@ do_one() {
         install_self $d
         msg "building current"
         ! build_current $d && return 1
+        msg "prettifying"
+        prettify_dir $d site_current
         [ $STOP_AT_CURRENT -eq 1 ] && return 0
     else
         d=${1/\//-}
     fi
-    msg "building latest"
+    msg "upgrading mkdocstrings"
     upgrade_mkdocstrings $d
+    msg "building latest"
     ! build_latest $d && return 2
+    msg "prettifying"
+    prettify_dir $d site_latest
+    msg "diffing"
+    ! do_diff $d | tee diff-$d.txt && return 2
     return 0
 }
 

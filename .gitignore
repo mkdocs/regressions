@@ -4,3 +4,4 @@ repos/
 logs/
 results.log
 mkdocstrings
+diff-*.txt
