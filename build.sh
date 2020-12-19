@@ -72,7 +72,16 @@ build_latest() {
 }
 
 do_diff() {
-    diff -X exclude_patterns.txt --suppress-common-lines -r repos/$1/site_current repos/$1/site_latest
+    diff_output="$(
+        diff \
+            -X exclude_patterns.txt \
+            -B --suppress-blank-empty \
+            --suppress-common-lines \
+            -r repos/$1/site_current repos/$1/site_latest | \
+                grep -v '^Build Date UTC :' 
+    )"
+    [ -n "${diff_output}" ] && return 2
+    return 0
 }
 
 msg() {
@@ -112,8 +121,7 @@ do_one() {
     msg "prettifying"
     prettify_dir $d site_latest
     msg "diffing"
-    ! do_diff $d | tee diff-$d.txt && return 2
-    return 0
+    ! do_diff $d | tee diff-$d.txt
 }
 
 do_one_silent() {
