@@ -129,6 +129,7 @@ do_one() {
     prettify_dir $d site_latest
     msg "diffing"
     ! do_diff $d | tee diff-$d.diff && return 2
+    rm diff-$d.diff
     return 0
 }
 
