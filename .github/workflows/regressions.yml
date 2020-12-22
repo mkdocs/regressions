@@ -23,6 +23,7 @@ jobs:
 
     strategy:
       max-parallel: 10
+      fail-fast: false
       matrix:
         repo:
         - arogozhnikov/einops
