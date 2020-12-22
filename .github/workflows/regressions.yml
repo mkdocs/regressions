@@ -22,6 +22,7 @@ jobs:
   regressions:
 
     strategy:
+      max-parallel: 10
       matrix:
         repo:
         - arogozhnikov/einops
@@ -34,42 +35,232 @@ jobs:
         - salesforce/cloudsplaining
         - deepcharles/ruptures
         - DataDog/integrations-core
-        - MaartenGr/BERTopic
         - damiafuentes/DJITelloPy
-        - damiafuentes/DJITelloPy
-        - koaning/human-learn
-        - MaartenGr/KeyBERT
         - MaartenGr/PolyFuzz
+        - pawamoy/mkdocstrings
+        - koaning/human-learn
         - RasaHQ/whatlies
+        - pawamoy/aria2p
         - copier-org/copier
         - poets-ai/elegy
-        - cs01/pygdbmi
         - TheHive-Project/TheHive4py
+        - cs01/pygdbmi
         - sleuth-io/code-video-generator
         - aparcar/asu
         - kelvindecosta/picharsso
         - daxartio/tinvest
+        - tjltjl/plycutter
+        - pawamoy/shell-history
         - suned/pfun
         - coady/multimethod
         - hSaria/ChromaTerm
         - basedosdados/mais
         - pyomeca/pyomeca
         - abdullahselek/HerePy
-        - koaning/clumper
         - Servir-Mekong/hydra-floods
-        - coady/django-model-values
-        - phurwicz/hover
-        - abdullahselek/authenticatorpy
         - JosXa/tgintegration
+        - koaning/clumper
+        - coady/lupyne
+        - abdullahselek/authenticatorpy
+        - coady/django-model-values
         - up42/up42-py
-        - voidful/TFkit
-        - tjltjl/plycutter
+        - DigitalPhonetics/adviser
+        - beancount/docs
         - sinaahmadi/klpt
         - 173TECH/sayn
+        - pawamoy/git-changelog
         - verifid/facereg
+        - ppsp-team/HyPyP
         - abdullahselek/spampy
         - openkinome/kinoml
-        - ppsp-team/HyPyP
+        - lyz-code/blue-book
+        - voidful/NLPrep
+        - verifid/mocr
+        - Skyscanner/pycfmodel
+        - pawamoy/pytkdocs
+        - abdullahselek/koolsla
+        - algobulls/pyalgotrading
+        - Materials-Consortia/optimade-python-tools
+        - voidful/nlp2go
+        - deethon/deethon
+        - coady/placeholder
+        - cgarciae/dataget
+        - microsoft/reconner
+        - koaning/memo
+        - pawamoy/dependenpy
+        - coady/waiter
+        - columbia-it/django-jsonapi-training
+        - giswqs/eefolium
+        - verifid/ner-d
+        - coady/graphique
+        - mthorrell/wideboost
+        - materialsproject/maggma
+        - materialsproject/emmet
+        - ing-bank/probatus
+        - tshauck/gcgc
+        - jrieke/traintool
+        - HuiiBuh/AsyncSpotify
+        - PhIMaL/DeePyMoD
+        - pawamoy/moving-stars
+        - pawamoy/archan
+        - manujosephv/deeprenewalprocess
+        - lyz-code/autoimport
+        - CostReduce/cli
+        - pawamoy/pawabot
+        - pawamoy/copier-poetry
+        - lumapps/lumapps-sdk
+        - jvfe/reconciler
+        - coady/futured
+        - coady/clients
+        - andreztz/notify-send
+        - tjhunter/dds_py
+        - openforcefield/qcsubmit
+        - materialsproject/mrnet
+        - gergelyk/peepshow
+        - CapgeminiInventIDE/doc_loader
+        - zillionare/omega
+        - SignalOceanSdk/SignalSDK
+        - pawamoy/duty
+        - zillionare/omicron
+        - usnistgov/nestor
+        - shervinazadi/topoGenesis
+        - robertanto/bob_telegram_tools
+        - pawamoy/website
+        - pawamoy/privibot
+        - pawamoy/failprint
+        - pawamoy/ansito
+        - nsidnev/edgeql-queries
+        - materialsproject/pyRho
+        - franneck94/TensorCross
+        - cogip/simulation
+        - coady/spector
+        - aahnik/py_package
+        - triaxtec/flex-config
+        - toybox-rs/toybox-rs
+        - rorre/Phillip
+        - pedrolarben/ADLStream
+        - pawamoy/neopy
+        - opensafely/documentation
+        - mcous/decoy
+        - jvfe/wikidata_panglaodb
+        - jnoortheen/arger
+        - jayqi/quickhttp
+        - immerse-project/nemo-simsar
+        - frankier/skelshop
+        - felipemarkson/dssdata
+        - cuenca-mx/facturapi-python
+        - christian-hawk/pydoautomator
+        - chenrz925/waterch-tasker
+        - auredentan/starlette-session
+        - YannBeauxis/sinagot
+        - wDove1/motorcontrollib
+        - ValentinCalomme/syngle
+        - TensorTom/traversy
+        - slaclab/lume-model
+        - RemiRigal/DatasetExplorer
+        - rdilweb/docs
+        - phil65/PrettyQt
+        - peterspackman/chmpy
+        - pennz/kaggle_runner
+        - pawamoy/mvodb
+        - pawamoy/keycut
+        - PatrickOHara/tspwplib
+        - oprypin/crsfml-mkdocstrings
+        - mljar/docs
+        - kabirkhan/recon
+        - jejjohnson/rbig_eo
+        - jacquelinegarrahan/lume-model
+        - jacquelinegarrahan/lume-epics
+        - HumanBrainProject/PyJuGEx
+        - HSF-reco-and-software-triggers/Tracking-ML-Exa.TrkX
+        - grasshoff/philhistcomp
+        - fabridamicelli/echoes
+        - e2fyi/iotoolz
+        - daxartio/termynal
+        - collectif-codata/pyepidemics
+        - Brickworks/HAB-toolbox
+        - besmerd/spool
+        - bari12/documentation_test
+        - avast/ep-stats
+        - Abd0s/skidtools
+        - yanniskatsaros/gutensearch
+        - wolfgangwazzlestrauss/yamltable
+        - wolfgangwazzlestrauss/scaffold-python
+        - wolfgangwazzlestrauss/cloudpath
+        - tms-studio/python-music-browser
+        - Tecnativa/versort
+        - takavfx/Takanori-Note
+        - Strategy-Tap/Novizi-BackEnd
+        - slaclab/lume-epics
+        - simon-engledew/aiosshim
+        - shmileee/bitbucket-python-client
+        - Rushyanth111/Semester-Stats-Report
+        - romainmartinez/pyomeca-refactor
+        - rohit507/exam_gen
+        - remykusters/DeePyMoD2
+        - qwergram/jensen
+        - PrimarySite/rproxyi
+        - phishdetect/phishdetect.github.io
+        - phil65/pandastools
+        - pawamoy/unminder
+        - pawamoy/neo4j-api
+        - OSUKED/Octopy-Energy
+        - Onefootball/onefootball-network-api-py
+        - omussell/hortus
+        - nstockton/mapperproxy-mume
+        - nigelm/ssh2_parse_key
+        - nigelm/broadworks_ocip
+        - nickc1/seebuoy
+        - na0fu3y/bqformat
+        - mscheinert/simsar
+        - mondeja/http-request-codegen
+        - Mohamed-Kaizen/teached
+        - Mohamed-Kaizen/IWork-test
+        - Mohamed-Kaizen/ihsan
+        - Mohamed-Kaizen/ethiopian-identity-provider
+        - michael-nc/ROAR_decal_hw7
+        - marshall-lab/TITAN
+        - lyz-code/yamlfix
+        - lyz-code/trusted-advisor-exporter
+        - lyz-code/routine
+        - lyz-code/drode
+        - lyz-code/cookiecutter-python-project
+        - lionetony0703/Tello-EDU-Test
+        - Larry-Gan/ROAR-Submission
+        - kuwv/python-compendium
+        - kuwv/python-argufy
+        - kchennen/PythonProject
+        - joshiswhite19/Hack2020TelloDrone
+        - jackykwok2002/ROAR_Final
+        - InTack2/til-note
+        - INSPIDE/pyportall
+        - HagasSaan/notifier
+        - gergelyk/python-tibidi
+        - ExpressApp/pybotx
+        - erp12/performance-curves
+        - ejolly/utilz
+        - duichwer/mkdocstringsdummy
+        - dcordb/locating-facilities
+        - daxartio/daxartio.github.io
+        - DataDog/datadog-api-client-python
+        - cimourdain/python_lib_template
+        - cimourdain/piteau
+        - cgarciae/dicto
+        - btjanaka/logdir
+        - augcog/ROAR_Sim
+        - augcog/ROAR-DeCal
+        - a-slice-of-py/data-scientist-hub
+        - asdegoyeneche/ROAR
+        - areed145/kk6gpv-wunderground
+        - areed145/kk6gpv-mqtt
+        - areed145/kk6gpv-bus-wx
+        - areed145/kk6gpv-bus-iot
+        - areed145/kk6gpv-aprs-prefix
+        - aparcar/udronerc
+        - amansidhant/ROARproj
+        - aitirga/pictolines
+        - aguiarandre/infra-study
+
 
     runs-on: ubuntu-latest
 

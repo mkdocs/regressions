@@ -83,8 +83,12 @@ do_diff() {
     echo "${diff_output}"
     if [ -n "$(grep -Ev \
                 -e '^[^+-]' \
-                -e '^[+-] Build Date UTC :' \
-                -e '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}' \
+                -e '^(\+\+\+|---)' \
+                -e '^\+\s+</span>' \
+                -e '^\+\s+<span class="(n|fm)">' \
+                -e '^\+\s+<code class="highlight language-python">' \
+                -e '^[+-]Build Date UTC :' \
+                -e '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}' \
                 -e '0x[a-f0-9]+' <<<"${diff_output}")" ]; then
         return 1
     fi

@@ -2,7 +2,7 @@
 while read -r repo; do
   (
     cd repos/${repo/\//-}
-    if [ -f setup.py -o -f pyproject.toml ] && [ -f mkdocs.yml ]; then
+    if [ -f mkdocs.yml ]; then
       echo $repo
     fi
   )
