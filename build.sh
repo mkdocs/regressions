@@ -58,6 +58,18 @@ prettify_dir() {
     done
 }
 
+pip_freeze_current() {
+    repos/$1/venv/bin/python -m pip freeze > freeze-$1-current.txt
+}
+
+pip_freeze_latest() {
+    repos/$1/venv/bin/python -m pip freeze > freeze-$1-latest.txt
+}
+
+freeze_diff() {
+    diff -U0 freeze-$1-current.txt freeze-$1-latest.txt
+}
+
 build_current() {
     (cd repos/$1; venv/bin/mkdocs build -v -d site_current)
 }
@@ -84,8 +96,8 @@ do_diff() {
     if [ -n "$(grep -Ev \
                 -e '^[^+-]' \
                 -e '^(\+\+\+|---)' \
-                -e '^\+\s+</span>' \
-                -e '^\+\s+<span class="(n|fm)">' \
+                -e '^\+\s+</(span|code)>' \
+                -e '^\+\s+<span class="(n|o|fm|nb)">' \
                 -e '^\+\s+<code class="highlight language-python">' \
                 -e '^[+-]Build Date UTC :' \
                 -e '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}' \
@@ -117,6 +129,8 @@ do_one() {
         install_deps $d
         msg "installing self"
         install_self $d
+        msg "freezing current"
+        pip_freeze_current $d
         msg "building current"
         ! build_current $d && return 1
         msg "prettifying"
@@ -127,6 +141,10 @@ do_one() {
     fi
     msg "upgrading mkdocstrings"
     upgrade_mkdocstrings $d
+    msg "freezing latest"
+    pip_freeze_latest $d
+    msg "diffing freezes"
+    freeze_diff $d
     msg "building latest"
     ! build_latest $d && return 2
     msg "prettifying"
