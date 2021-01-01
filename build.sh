@@ -35,11 +35,11 @@ install_deps() {
     extensions=$(repos/$1/venv/bin/python get_extensions_packages.py repos/$1)
 
     # install
-    repos/$1/venv/bin/python -m pip install $plugins $extensions
+    repos/$1/venv/bin/python -m pip install --pre $plugins $extensions
 }
 
 install_self() {
-    (cd repos/$1; venv/bin/python -m pip install .)
+    (cd repos/$1; venv/bin/python -m pip install --pre .)
 }
 
 prettify_file() {
