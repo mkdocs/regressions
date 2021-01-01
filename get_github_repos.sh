@@ -20,7 +20,7 @@ while curl -s -H "Authorization: token $GITHUB_TOKEN" 'https://api.github.com/se
         rm -rf repos/${repo/\//-}
       fi
     fi
-  done
+  done; do
   ((page++))
 done
 sort -u repos.txt -o repos.txt
