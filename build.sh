@@ -35,11 +35,11 @@ install_deps() {
     extensions=$(repos/$1/venv/bin/python get_extensions_packages.py repos/$1)
 
     # install
-    repos/$1/venv/bin/python -m pip install $plugins $extensions
+    repos/$1/venv/bin/python -m pip install --pre $plugins $extensions
 }
 
 install_self() {
-    (cd repos/$1; venv/bin/python -m pip install .)
+    (cd repos/$1; venv/bin/python -m pip install --pre .)
 }
 
 prettify_file() {
@@ -48,8 +48,7 @@ prettify_file() {
     else
         python=python
     fi
-    prettified="$($python -c "import bs4, sys, pathlib; print(bs4.BeautifulSoup(pathlib.Path('$1').read_text()).prettify())")"
-    echo "${prettified}" > "$1"
+    $python normalize_file.py "$1"
 }
 
 prettify_dir() {
@@ -85,26 +84,11 @@ build_latest() {
 }
 
 do_diff() {
-    diff_output="$(
-        diff \
-            -X exclude_patterns.txt \
-            -B --suppress-blank-empty \
-            --suppress-common-lines \
-            -U0 -w -r repos/$1/site_current repos/$1/site_latest
-    )"
-    echo "${diff_output}"
-    if [ -n "$(grep -Ev \
-                -e '^[^+-]' \
-                -e '^(\+\+\+|---)' \
-                -e '^\+\s+</(span|code)>' \
-                -e '^\+\s+<span class="(n|o|fm|nb)">' \
-                -e '^\+\s+<code class="highlight language-python">' \
-                -e '^[+-]Build Date UTC :' \
-                -e '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}' \
-                -e '0x[a-f0-9]+' <<<"${diff_output}")" ]; then
-        return 1
-    fi
-    return 0
+    diff \
+        -X exclude_patterns.txt \
+        -B --suppress-blank-empty \
+        --suppress-common-lines \
+        -U2 -w -r repos/$1/site_current repos/$1/site_latest
 }
 
 msg() {
@@ -150,8 +134,7 @@ do_one() {
     msg "prettifying"
     prettify_dir $d site_latest
     msg "diffing"
-    ! do_diff $d | tee diff-$d.diff && return 2
-    rm diff-$d.diff
+    ! do_diff $d && return 2
     return 0
 }
 
