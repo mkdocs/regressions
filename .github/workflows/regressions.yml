@@ -42,7 +42,7 @@ jobs:
         - copier-org/copier
         - poets-ai/elegy
         - TheHive-Project/TheHive4py
-        - sleuth-io/code-video-generator
+        # - sleuth-io/code-video-generator
         - aparcar/asu
         #- kelvindecosta/picharsso
         - daxartio/tinvest
@@ -50,7 +50,7 @@ jobs:
         - PySport/kloppy
         #- pawamoy/shell-history
         #- coady/multimethod
-        - hSaria/ChromaTerm
+        # - hSaria/ChromaTerm
         - basedosdados/mais
         #- pyomeca/pyomeca
         - abdullahselek/HerePy
