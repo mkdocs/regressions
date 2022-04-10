@@ -39,7 +39,7 @@ jobs:
         #- koaning/human-learn
         #- RasaHQ/whatlies
         #- pawamoy/aria2p
-        - copier-org/copier
+        # - copier-org/copier
         - poets-ai/elegy
         - TheHive-Project/TheHive4py
         # - sleuth-io/code-video-generator
@@ -47,11 +47,11 @@ jobs:
         #- kelvindecosta/picharsso
         - daxartio/tinvest
         #- tjltjl/plycutter
-        - PySport/kloppy
+        # - PySport/kloppy
         #- pawamoy/shell-history
         #- coady/multimethod
         # - hSaria/ChromaTerm
-        - basedosdados/mais
+        # - basedosdados/mais
         #- pyomeca/pyomeca
         - abdullahselek/HerePy
         - Servir-Mekong/hydra-floods

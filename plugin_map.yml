@@ -3,6 +3,7 @@ awesome-pages: mkdocs-awesome-pages-plugin
 bibtex: mkdocs-bibtex
 exclude: mkdocs-exclude
 exclude-search: mkdocs-exclude-search
+gen-files: mkdocs-gen-files
 git-authors: mkdocs-git-authors-plugin
 git-revision-date-localized: mkdocs-git-revision-date-localized-plugin
 git-revision-date: mkdocs-git-revision-date-plugin
@@ -22,6 +23,7 @@ mknotebooks: mknotebooks
 nbconvert: mkdocs-nbconvert
 pdf-export: mkdocs-pdf-export-plugin
 progress: mkdocs-plugin-progress
+section-index: mkdocs-section-index
 redirects: mkdocs-redirects
 table-reader: mkdocs-table-reader-plugin
 techdocs-core: mkdocs-techdocs-core
