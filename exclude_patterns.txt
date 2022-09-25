@@ -1,2 +1,4 @@
 sitemap.xml.gz
 search_index.json
+*rss*.xml
+lunr.js

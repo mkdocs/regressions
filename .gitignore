@@ -3,7 +3,7 @@ venv/
 repos/
 logs/
 results.log
-mkdocstrings
+mkdocs
 diff-*
 freeze-*
 .python-version

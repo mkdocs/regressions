@@ -10,13 +10,13 @@ clone() {
     if [ -d $d ]; then
         (cd $d; git pull)
     else
-        git clone https://github.com/$1 repos/$d --depth=1 &>/dev/null
+        git clone https://github.com/$1 repos/$d --depth=1 --recursive &>/dev/null
     fi
     echo $d
 }
 
 make_venv() {
-    python -m venv repos/$1/venv
+    python -m venv --system-site-packages repos/$1/venv
 }
 
 install_mkdocs() {
@@ -37,7 +37,7 @@ install_deps() {
 }
 
 install_self() {
-    (cd repos/$1; venv/bin/python -m pip install --pre .)
+    (cd repos/$1; venv/bin/python -m pip install .[all] || venv/bin/python -m pip install .)
 }
 
 prettify_dir() {
@@ -62,13 +62,13 @@ freeze_diff() {
 }
 
 build_current() {
-    (cd repos/$1; venv/bin/mkdocs build -v -d site_current)
+    (cd repos/$1; sed -i '/strict: true/d' mkdocs.yml; venv/bin/mkdocs build -v -d site_current)
 }
 
-upgrade_mkdocstrings() {
-    repos/$1/venv/bin/python -m pip uninstall -y mkdocstrings
-    [ ! -e ./mkdocstrings ] && git clone https://github.com/pawamoy/mkdocstrings --depth=1
-    repos/$1/venv/bin/python -m pip install ./mkdocstrings
+upgrade_mkdocs() {
+    repos/$1/venv/bin/python -m pip uninstall -y mkdocs
+    [ ! -e ./mkdocs ] && git clone https://github.com/mkdocs/mkdocs --depth=1
+    repos/$1/venv/bin/python -m pip install ./mkdocs
 }
 
 build_latest() {
@@ -115,8 +115,8 @@ do_one() {
     else
         d=${1/\//-}
     fi
-    msg "upgrading mkdocstrings"
-    upgrade_mkdocstrings $d
+    msg "upgrading mkdocs"
+    upgrade_mkdocs $d
     msg "freezing latest"
     pip_freeze_latest $d
     msg "diffing freezes"

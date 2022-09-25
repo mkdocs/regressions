@@ -24,61 +24,22 @@ jobs:
       fail-fast: false
       matrix:
         repo:
-        - arogozhnikov/einops
-        - jmoiron/humanize
-        #- cgarciae/pypeln
-        - salesforce/policy_sentry
-        - archivy/archivy
-        - giswqs/geemap
-        - salesforce/cloudsplaining
-        #- deepcharles/ruptures
-        #- DataDog/integrations-core
-        - damiafuentes/DJITelloPy
-        - MaartenGr/PolyFuzz
-        #- pawamoy/mkdocstrings
-        #- koaning/human-learn
-        #- RasaHQ/whatlies
-        #- pawamoy/aria2p
-        # - copier-org/copier
-        - poets-ai/elegy
-        - TheHive-Project/TheHive4py
-        # - sleuth-io/code-video-generator
-        - aparcar/asu
-        #- kelvindecosta/picharsso
-        - daxartio/tinvest
-        #- tjltjl/plycutter
-        # - PySport/kloppy
-        #- pawamoy/shell-history
-        #- coady/multimethod
-        # - hSaria/ChromaTerm
-        # - basedosdados/mais
-        #- pyomeca/pyomeca
-        - abdullahselek/HerePy
-        - Servir-Mekong/hydra-floods
-        - JosXa/tgintegration
-        - koaning/clumper
-        #- coady/lupyne
-        #- RasaHQ/rasa-nlu-examples
-        - abdullahselek/authenticatorpy
-        - coady/django-model-values
-        #- DigitalPhonetics/adviser
-        - up42/up42-py
-        #- beancount/docs
-        - 173TECH/sayn
-        #- zmbc/shakespearelang
-        #- sinaahmadi/klpt
-        - pawamoy/git-changelog
-        #- verifid/facereg
-        - abdullahselek/spampy
-        #- ppsp-team/HyPyP
-        - lyz-code/blue-book
-        #- openkinome/kinoml
-        - voidful/NLPrep
-        - abdullahselek/koolsla
-        - pawamoy/pytkdocs
-        - verifid/mocr
-        #- Skyscanner/pycfmodel
-        - algobulls/pyalgotrading
+          - crystal-lang/crystal-book
+          - e-maxx-eng/e-maxx-eng
+          - emacs-lsp/lsp-mode
+          - gledos/ggame
+          - ikrima/gamedevguide
+          - k3d-io/k3d
+          - librenms/librenms
+          - ManticoreGamesInc/platform-documentation
+          - ni/systemlink-operations-handbook
+          - open-amt-cloud-toolkit/docs
+          - oprypin/mkdocs-gen-files
+          - Rat-Rig/V-core-3
+          - seleniumbase/SeleniumBase
+          - spaceship-prompt/spaceship-prompt
+          - tfeldmann/organize
+
 
     runs-on: ubuntu-latest
 
@@ -86,13 +47,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Set up Python 3.8
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: '3.10'
 
-    - name: Install PyYAML
-      run: python -m pip install --user pyyaml beautifulsoup4
+    - name: Install dependencies
+      run: python -m pip install -U pip wheel pyyaml beautifulsoup4 ${{ matrix.deps }}
 
     #- name: Set up the cache
     #  uses: actions/cache@v1
