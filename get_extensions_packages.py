@@ -3,9 +3,12 @@ from pathlib import Path
 
 import yaml
 
+yaml.SafeLoader.add_constructor("!ENV", lambda loader, node: None)
+yaml.SafeLoader.add_multi_constructor("tag:yaml.org,2002:python/name:", lambda loader, suffix, node: None)
+yaml.SafeLoader.add_multi_constructor("tag:yaml.org,2002:python/object/apply:", lambda loader, suffix, node: None)
 
 def read_extensions(directory, extension_map):
-    mkdocs_data = yaml.load((Path(directory) / "mkdocs.yml").read_text(), Loader=yaml.Loader)
+    mkdocs_data = yaml.load((Path(directory) / "mkdocs.yml").read_text(), Loader=yaml.SafeLoader)
     extensions = {e if isinstance(e, str) else list(e.keys())[0] for e in mkdocs_data.get("markdown_extensions", [])}
     extensions = {e.split(".", 1)[0] for e in extensions}
     native_exts = {
