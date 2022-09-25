@@ -24,18 +24,16 @@ install_mkdocs() {
 }
 
 install_deps() {
-    # mkdocs-material must be installed before others
-    # in case emoji_index: !!python/name:materialx.emoji... is used in mkdocs.yml
-    grep -q material repos/$1/mkdocs.yml && repos/$1/venv/bin/python -m pip install mkdocs-material
+    grep -q material repos/$1/mkdocs.yml && themes=mkdocs-material
 
     # plugins
     plugins=$(repos/$1/venv/bin/python get_plugins_packages.py repos/$1)
-    
+
     # extensions
     extensions=$(repos/$1/venv/bin/python get_extensions_packages.py repos/$1)
 
     # install
-    repos/$1/venv/bin/python -m pip install --pre $plugins $extensions
+    repos/$1/venv/bin/python -m pip install $themes $plugins $extensions
 }
 
 install_self() {
