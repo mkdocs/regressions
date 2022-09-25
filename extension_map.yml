@@ -1,3 +1,8 @@
+callouts: markdown-callouts
+deduplicate-toc: mkdocstrings-crystal
+full_yaml_metadata: markdown-full-yaml-metadata
+hbfm: hbfm
+lightgallery: lightgallery
 markdown_blockdiag: markdown-blockdiag
 markdown_include: markdown-include
 markdown_inline_graphviz: markdown-inline-graphviz
