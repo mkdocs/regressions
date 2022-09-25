@@ -42,19 +42,13 @@ install_self() {
     (cd repos/$1; venv/bin/python -m pip install --pre .)
 }
 
-prettify_file() {
+prettify_dir() {
     if [ -d venv ]; then
         python=venv/bin/python
     else
         python=python
     fi
-    $python normalize_file.py "$1"
-}
-
-prettify_dir() {
-    find repos/$1/$2 -name "*.html" | while read -r html_file; do
-        prettify_file "${html_file}"
-    done
+    find repos/$1/$2 -name "*.html" -print0 | xargs -0 -n16 -P4 -t $python normalize_file.py
 }
 
 pip_freeze_current() {
