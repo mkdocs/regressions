@@ -1,2 +1,4 @@
-pyyaml
 beautifulsoup4
+pyyaml
+mkdocs
+virtualenv

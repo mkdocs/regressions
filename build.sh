@@ -1,158 +1,90 @@
 #!/usr/bin/env bash
 
-set +e
-set -o pipefail
-mkdir -p logs
-mkdir -p repos
+set -e -u -o pipefail
 
-clone() {
-    d=${1/\//-}
-    if [ -d $d ]; then
-        (cd $d; git pull)
-    else
-        git clone https://github.com/$1 repos/$d --depth=1 --recursive &>/dev/null
+if [[ "$1" =~ "/" ]]; then
+    cmd="check"
+else
+    cmd="$1"
+    shift
+fi
+
+repo="$1"
+to_upgrade="${2:-git+https://github.com/mkdocs/mkdocs.git}"
+
+project_dir="repos/${repo/\//--}"
+
+group() {
+    echo "::group::$1"
+    shift
+    "$@" && echo "::endgroup::"
+}
+
+setup() {
+    if ! [[ -d "venv" ]]; then
+        python -m venv venv
+        venv/bin/pip install -U -r requirements.txt platformdirs
+        # HACK: Get the unreleased 'get-deps' command
+        dest_dir=$(echo venv/lib/python3.*/site-packages)
+        for f in mkdocs/__main__.py mkdocs/commands/get_deps.py mkdocs/utils/cache.py; do
+            curl -o "$dest_dir/$f" "https://raw.githubusercontent.com/mkdocs/mkdocs/master/$f"
+        done
     fi
-    echo $d
 }
 
-make_venv() {
-    python -m venv --system-site-packages repos/$1/venv
-}
-
-install_mkdocs() {
-    repos/$1/venv/bin/python -m pip install mkdocs
-}
-
-install_deps() {
-    grep -q material repos/$1/mkdocs.yml && themes=mkdocs-material
-
-    # plugins
-    plugins=$(repos/$1/venv/bin/python get_plugins_packages.py repos/$1)
-
-    # extensions
-    extensions=$(repos/$1/venv/bin/python get_extensions_packages.py repos/$1)
-
-    # install
-    repos/$1/venv/bin/python -m pip install $themes $plugins $extensions
-}
-
-install_self() {
-    (cd repos/$1; venv/bin/python -m pip install .[all] || venv/bin/python -m pip install .)
-}
-
-prettify_dir() {
-    if [ -d venv ]; then
-        python=venv/bin/python
-    else
-        python=python
+clone_repo() {
+    mkdir -p "$project_dir"
+    if ! [[ -d "$project_dir/repo" ]]; then
+        echo "Cloning" "https://github.com/$repo"
+        git clone "https://github.com/$repo" "$project_dir/repo" --depth=1 --recursive &>/dev/null
     fi
-    find repos/$1/$2 -name "*.html" -print0 | xargs -0 -n16 -P4 -t $python normalize_file.py
+    mkdocs_yml=$(cd "$project_dir/repo" && (2>/dev/null ls *mkdocs.y*ml || ls */mkdocs.y*ml) | head -1)
+    sed -i '/strict: *true/d' "$project_dir/repo/$mkdocs_yml"
+    if ! [[ -d "$project_dir/venv" ]]; then
+        venv/bin/virtualenv "$project_dir/venv"
+    fi
 }
 
-pip_freeze_current() {
-    repos/$1/venv/bin/python -m pip freeze > freeze-$1-current.txt
-}
-
-pip_freeze_latest() {
-    repos/$1/venv/bin/python -m pip freeze > freeze-$1-latest.txt
-}
-
-freeze_diff() {
-    diff -U0 freeze-$1-current.txt freeze-$1-latest.txt
+_build() {
+    echo "==== Building $1 ===="
+    export PYTHONPATH=
+    "$project_dir/venv/bin/pip" freeze > "$project_dir/freeze-$1.txt"
+    (set -x; cd "$project_dir/repo"; ../venv/bin/mkdocs build -f "$mkdocs_yml" -d "$(pwd)/../site-$1")
+    find "$project_dir/site-$1" -name "*.html" -print0 | xargs -0 -n16 -P4 venv/bin/python normalize_file.py
 }
 
 build_current() {
-    (cd repos/$1; sed -i '/strict: true/d' mkdocs.yml; venv/bin/mkdocs build -v -d site_current)
-}
-
-upgrade_mkdocs() {
-    repos/$1/venv/bin/python -m pip uninstall -y mkdocs
-    [ ! -e ./mkdocs ] && git clone https://github.com/mkdocs/mkdocs --depth=1
-    repos/$1/venv/bin/python -m pip install ./mkdocs
+    clone_repo
+    deps=(mkdocs $(venv/bin/mkdocs get-deps -f "$project_dir/repo/$mkdocs_yml" || true))
+    group "Installing ${deps[*]}" \
+    "$project_dir/venv/bin/pip" install -U --force-reinstall "${deps[@]}"
+    _build current
 }
 
 build_latest() {
-    (cd repos/$1; venv/bin/mkdocs build -v -d site_latest)
+    clone_repo
+    group "Upgrading $to_upgrade" \
+    "$project_dir/venv/bin/pip" install -U "$to_upgrade"
+    _build latest
 }
 
-do_diff() {
+compare() {
+    diff=$(diff -U0 "$project_dir/freeze-current.txt" "$project_dir/freeze-latest.txt") ||
+        group "Diff of freezes" \
+        echo "$diff"
+    echo "==== Comparing ===="
     diff \
         -X exclude_patterns.txt \
         -B --suppress-blank-empty \
         --suppress-common-lines \
-        -U2 -w -r repos/$1/site_current repos/$1/site_latest
+        -U2 -w -r "$project_dir/site-current" "$project_dir/site-latest"
 }
 
-msg() {
-    echo
-    echo
-    echo -e "====================================="
-    echo -e "     $1"
-    echo -e "====================================="
-    echo
-    echo
+check() {
+    setup
+    build_current
+    build_latest
+    compare
 }
 
-do_one() {
-    if [ $RESUME_AT_LATEST -eq 0 ]; then
-        msg "cloning"
-        d=$(clone $1)
-        msg "making venv"
-        make_venv $d
-        msg "installing mkdocs"
-        install_mkdocs $d
-        msg "installing deps"
-        install_deps $d
-        msg "installing self"
-        install_self $d
-        msg "freezing current"
-        pip_freeze_current $d
-        msg "building current"
-        ! build_current $d && return 1
-        msg "prettifying"
-        prettify_dir $d site_current
-        [ $STOP_AT_CURRENT -eq 1 ] && return 0
-    else
-        d=${1/\//-}
-    fi
-    msg "upgrading mkdocs"
-    upgrade_mkdocs $d
-    msg "freezing latest"
-    pip_freeze_latest $d
-    msg "diffing freezes"
-    freeze_diff $d
-    msg "building latest"
-    ! build_latest $d && return 2
-    msg "prettifying"
-    prettify_dir $d site_latest
-    msg "diffing"
-    ! do_diff $d && return 2
-    return 0
-}
-
-do_one_silent() {
-    do_one $1 &>logs/build-${1/\//-}.log
-    case $? in
-        0) echo "$1: success" ;;
-        1) echo "$1: skipped (build current failed)" ;;
-        2) echo "$1: failed" ;;
-    esac | tee -a results.log
-}
-
-do_all() {
-    cat repos.txt | parallel bash build.sh one_silent {}
-}
-
-main() {
-    STOP_AT_CURRENT=0
-    RESUME_AT_LATEST=0
-    case $1 in
-        one) do_one $2 ;;
-        one_current) STOP_AT_CURRENT=1; do_one $2 ;;
-        one_latest) RESUME_AT_LATEST=1; do_one $2 ;;
-        one_silent) do_one_silent $2 ;;
-        all) do_all ;;
-    esac
-}
-
-main "$@"
+"$cmd"
