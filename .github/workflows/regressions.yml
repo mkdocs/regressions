@@ -20,7 +20,12 @@ jobs:
           - k3d-io/k3d
           - librenms/librenms
           - ManticoreGamesInc/platform-documentation
+          - mkdocs/mkdocs
+          - mkdocstrings/mkdocstrings
+          - nasa-jpl/open-source-rover
+          - Noovolari/leapp
           - ni/systemlink-operations-handbook
+          - ntno/mkdocs-terminal
           - open-amt-cloud-toolkit/docs
           - oprypin/mkdocs-gen-files
           - Rat-Rig/V-core-3
