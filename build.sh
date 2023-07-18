@@ -64,7 +64,7 @@ build_current() {
 build_latest() {
     clone_repo
     group "Upgrading $to_upgrade" \
-    "$project_dir/venv/bin/pip" install -U "$to_upgrade"
+    "$project_dir/venv/bin/pip" install -U --force-reinstall "$to_upgrade"
     _build latest
 }
 

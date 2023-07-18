@@ -1,3 +1,5 @@
+name: Regressions
+
 on:
   push:
   pull_request:
