@@ -47,7 +47,6 @@ clone_repo() {
 
 _build() {
     echo "==== Building $1 ===="
-    export PYTHONPATH=
     "$project_dir/venv/bin/pip" freeze > "$project_dir/freeze-$1.txt"
     (set -x; cd "$project_dir/repo"; ../venv/bin/mkdocs build -f "$mkdocs_yml" -d "$(pwd)/../site-$1")
     find "$project_dir/site-$1" -name "*.html" -print0 | xargs -0 -n16 -P4 venv/bin/python normalize_file.py
@@ -58,10 +57,11 @@ build_current() {
     deps=(mkdocs $(venv/bin/mkdocs get-deps -f "$project_dir/repo/$mkdocs_yml" || true))
     group "Installing ${deps[*]}" \
     "$project_dir/venv/bin/pip" install -U --force-reinstall "${deps[@]}"
-    _build current
+    (export PYTHONPATH=; _build current)
 }
 
 build_latest() {
+    [ -n "$to_upgrade" ] || return
     clone_repo
     group "Upgrading $to_upgrade" \
     "$project_dir/venv/bin/pip" install -U --force-reinstall "$to_upgrade"
