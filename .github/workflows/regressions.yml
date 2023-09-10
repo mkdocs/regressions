@@ -6,6 +6,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      to_upgrade:
+        description: 'The dependency to upgrade and compare: repository@branch'
+        required: true
+        default: 'git+https://github.com/mkdocs/mkdocs.git@master'
 
 jobs:
   regressions:
@@ -46,6 +51,6 @@ jobs:
     - name: Build current version
       run: ./build.sh build_current ${{ matrix.repo }}
     - name: Build latest version
-      run: ./build.sh build_latest ${{ matrix.repo }}
+      run: ./build.sh build_latest ${{ matrix.repo }} ${{ github.event.inputs.to_upgrade }}
     - name: Compare sites
       run: ./build.sh compare ${{ matrix.repo }}
