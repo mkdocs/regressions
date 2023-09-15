@@ -23,12 +23,7 @@ group() {
 setup() {
     if ! [[ -d "venv" ]]; then
         python -m venv venv
-        venv/bin/pip install -U -r requirements.txt platformdirs
-        # HACK: Get the unreleased 'get-deps' command
-        dest_dir=$(echo venv/lib/python3.*/site-packages)
-        for f in mkdocs/__main__.py mkdocs/commands/get_deps.py mkdocs/utils/cache.py; do
-            curl -o "$dest_dir/$f" "https://raw.githubusercontent.com/mkdocs/mkdocs/master/$f"
-        done
+        venv/bin/pip install -U -r requirements.txt
     fi
 }
 
@@ -39,7 +34,6 @@ clone_repo() {
         git clone "https://github.com/$repo" "$project_dir/repo" --depth=1 --recursive &>/dev/null
     fi
     mkdocs_yml=$(cd "$project_dir/repo" && (2>/dev/null ls *mkdocs.y*ml || ls */mkdocs.y*ml) | head -1)
-    sed -i '/strict: *true/d' "$project_dir/repo/$mkdocs_yml"
     if ! [[ -d "$project_dir/venv" ]]; then
         venv/bin/virtualenv "$project_dir/venv"
     fi
@@ -48,13 +42,13 @@ clone_repo() {
 _build() {
     echo "==== Building $1 ===="
     "$project_dir/venv/bin/pip" freeze > "$project_dir/freeze-$1.txt"
-    (set -x; cd "$project_dir/repo"; ../venv/bin/mkdocs build -f "$mkdocs_yml" -d "$(pwd)/../site-$1")
+    (set -x; cd "$project_dir/repo"; ../venv/bin/mkdocs build --no-strict -f "$mkdocs_yml" -d "$(pwd)/../site-$1")
     find "$project_dir/site-$1" -name "*.html" -print0 | xargs -0 -n16 -P4 venv/bin/python normalize_file.py
 }
 
 build_current() {
     clone_repo
-    deps=(mkdocs $(venv/bin/mkdocs get-deps -f "$project_dir/repo/$mkdocs_yml" || true))
+    deps=($(venv/bin/mkdocs get-deps -f "$project_dir/repo/$mkdocs_yml" || true))
     group "Installing ${deps[*]}" \
     "$project_dir/venv/bin/pip" install -U --force-reinstall "${deps[@]}"
     (export PYTHONPATH=; _build current)
