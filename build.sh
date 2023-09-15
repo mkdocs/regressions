@@ -9,10 +9,17 @@ else
     shift
 fi
 
-repo="$1"
+repo_name="$1"
 to_upgrade="${2:-git+https://github.com/mkdocs/mkdocs.git}"
 
-project_dir="repos/${repo/\//--}"
+info_dir="projects/${repo_name/\//--}"
+repo_dir="repos/${repo_name/\//--}"
+
+[[ "$(cat "$info_dir/url.txt")" =~ ^(https://github.com/[^/]+/[^/]+)/raw/([^/]+)/(.+)$ ]]
+repo="${BASH_REMATCH[1]}"
+branch="${BASH_REMATCH[2]}"
+mkdocs_yml="${BASH_REMATCH[3]}"
+
 
 group() {
     echo "::group::$1"
@@ -28,29 +35,32 @@ setup() {
 }
 
 clone_repo() {
-    mkdir -p "$project_dir"
-    if ! [[ -d "$project_dir/repo" ]]; then
-        echo "Cloning" "https://github.com/$repo"
-        git clone "https://github.com/$repo" "$project_dir/repo" --depth=1 --recursive &>/dev/null
-    fi
-    mkdocs_yml=$(cd "$project_dir/repo" && (2>/dev/null ls *mkdocs.y*ml || ls */mkdocs.y*ml) | head -1)
-    if ! [[ -d "$project_dir/venv" ]]; then
-        venv/bin/virtualenv "$project_dir/venv"
+    mkdir -p "$repo_dir/repo"
+    (
+        cd "$repo_dir/repo"
+        git init -b checkout
+        git fetch --depth=1 "$repo" "$branch"
+        git reset --hard FETCH_HEAD
+    )
+    if ! [[ -d "$repo_dir/venv" ]]; then
+        venv/bin/virtualenv "$repo_dir/venv"
     fi
 }
 
 _build() {
     echo "==== Building $1 ===="
-    "$project_dir/venv/bin/pip" freeze > "$project_dir/freeze-$1.txt"
-    (set -x; cd "$project_dir/repo"; ../venv/bin/mkdocs build --no-strict -f "$mkdocs_yml" -d "$(pwd)/../site-$1")
-    find "$project_dir/site-$1" -name "*.html" -print0 | xargs -0 -n16 -P4 venv/bin/python normalize_file.py
+    "$repo_dir/venv/bin/pip" freeze > "$repo_dir/freeze-$1.txt"
+    (
+        cd "$repo_dir/repo"
+        ../venv/bin/mkdocs build --no-strict -f "$mkdocs_yml" -d "$(pwd)/../site-$1"
+    )
+    find "$repo_dir/site-$1" -name "*.html" -print0 | xargs -0 -n16 -P4 venv/bin/python normalize_file.py
 }
 
 build_current() {
     clone_repo
-    deps=($(venv/bin/mkdocs get-deps -f "$project_dir/repo/$mkdocs_yml" || true))
-    group "Installing ${deps[*]}" \
-    "$project_dir/venv/bin/pip" install -U --force-reinstall "${deps[@]}"
+    group "Installing deps" \
+    "$repo_dir/venv/bin/pip" install -U --force-reinstall --no-deps -r "$info_dir/requirements.txt"
     (export PYTHONPATH=; _build current)
 }
 
@@ -58,12 +68,12 @@ build_latest() {
     [ -n "$to_upgrade" ] || return
     clone_repo
     group "Upgrading $to_upgrade" \
-    "$project_dir/venv/bin/pip" install -U --force-reinstall "$to_upgrade"
+    "$repo_dir/venv/bin/pip" install -U --force-reinstall "$to_upgrade"
     _build latest
 }
 
 compare() {
-    diff=$(diff -U0 "$project_dir/freeze-current.txt" "$project_dir/freeze-latest.txt") ||
+    diff=$(diff -U0 "$repo_dir/freeze-current.txt" "$repo_dir/freeze-latest.txt") ||
         group "Diff of freezes" \
         echo "$diff"
     echo "==== Comparing ===="
@@ -71,7 +81,7 @@ compare() {
         -X exclude_patterns.txt \
         -B --suppress-blank-empty \
         --suppress-common-lines \
-        -U2 -w -r "$project_dir/site-current" "$project_dir/site-latest"
+        -U2 -w -r "$repo_dir/site-current" "$repo_dir/site-latest"
 }
 
 check() {

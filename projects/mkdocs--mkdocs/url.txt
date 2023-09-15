@@ -1,0 +1,1 @@
+https://github.com/mkdocs/mkdocs/raw/master/mkdocs.yml

@@ -13,34 +13,30 @@ on:
         default: 'git+https://github.com/mkdocs/mkdocs.git@master'
 
 jobs:
+  collect_projects:
+    runs-on: ubuntu-latest
+    outputs:
+      projects: ${{ steps.projects.outputs.projects }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: projects
+        shell: python
+        run: |
+          import json, os
+          projects = [d.replace('--', '/') for d in os.listdir('projects')]
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            print('projects=' + json.dumps(projects), file=f)
+
   regressions:
+    needs: collect_projects
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        repo:
-          - crystal-lang/crystal-book
-          - e-maxx-eng/e-maxx-eng
-          - emacs-lsp/lsp-mode
-          - gledos/ggame
-          - ikrima/gamedevguide
-          - k3d-io/k3d
-          - librenms/librenms
-          - mkdocs/mkdocs
-          - mkdocstrings/mkdocstrings
-          - nasa-jpl/open-source-rover
-          - Noovolari/leapp
-          - ni/systemlink-operations-handbook
-          - ntno/mkdocs-terminal
-          - open-amt-cloud-toolkit/docs
-          - oprypin/mkdocs-gen-files
-          - Rat-Rig/V-core-3
-          - seleniumbase/SeleniumBase
-          - spaceship-prompt/spaceship-prompt
-          - tfeldmann/organize
+        repo: ${{ fromJson(needs.collect_projects.outputs.projects) }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Set up Python
       uses: actions/setup-python@v4
       with:

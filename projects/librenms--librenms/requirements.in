@@ -1,0 +1,7 @@
+mkdocs
+mkdocs-exclude
+mkdocs-macros-plugin
+mkdocs-material
+mkdocs-minify-plugin
+mkdocs-redirects
+pymdown-extensions

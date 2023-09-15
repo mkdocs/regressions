@@ -1,0 +1,5 @@
+mkdocs
+mkdocs-autorefs
+mkdocs-include-markdown-plugin
+mkdocstrings
+mkdocstrings-python

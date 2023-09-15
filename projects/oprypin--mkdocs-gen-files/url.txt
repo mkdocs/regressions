@@ -1,0 +1,1 @@
+https://github.com/oprypin/mkdocs-gen-files/raw/master/mkdocs.yml

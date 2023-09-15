@@ -1,0 +1,1 @@
+https://github.com/ikrima/gamedevguide/raw/master/mkdocs.yml

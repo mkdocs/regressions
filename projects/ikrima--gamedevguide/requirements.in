@@ -1,0 +1,11 @@
+git+https://github.com/rdilweb/mkdocs-plugin-progress
+mdx-breakless-lists
+mkdocs
+mkdocs-awesome-pages-plugin
+mkdocs-callouts
+mkdocs-ezlinks-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-glightbox
+mkdocs-material
+mkdocs-meta-descriptions-plugin
+pymdown-extensions

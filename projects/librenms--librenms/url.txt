@@ -1,0 +1,1 @@
+https://github.com/librenms/librenms/raw/master/mkdocs.yml

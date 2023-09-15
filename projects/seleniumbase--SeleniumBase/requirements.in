@@ -1,0 +1,5 @@
+mkdocs
+mkdocs-exclude-search
+mkdocs-material
+mkdocs-simple-hooks
+pymdown-extensions

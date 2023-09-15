@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-img2fig-plugin
+mkdocs-macros-plugin
+mkdocs-material
+mkdocs-render-swagger-plugin
+pymdown-extensions

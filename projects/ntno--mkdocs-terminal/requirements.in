@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-exclude-search
+mkdocs-git-revision-date-plugin
+mkdocs-macros-plugin
+mkdocs-terminal
+pymdown-extensions

@@ -1,0 +1,1 @@
+https://github.com/k3d-io/k3d/raw/main/mkdocs.yml
