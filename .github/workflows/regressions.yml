@@ -26,7 +26,6 @@ jobs:
           - ikrima/gamedevguide
           - k3d-io/k3d
           - librenms/librenms
-          - ManticoreGamesInc/platform-documentation
           - mkdocs/mkdocs
           - mkdocstrings/mkdocstrings
           - nasa-jpl/open-source-rover
