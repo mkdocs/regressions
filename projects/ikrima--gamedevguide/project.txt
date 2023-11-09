@@ -1,0 +1,2 @@
+https://github.com/ikrima/gamedevguide/blob/master/mkdocs.yml
+https://github.com/ikrima/gamedevguide/raw/3dc28e90b93a435eb6f1aac7149246e3390f11a2/mkdocs.yml

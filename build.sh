@@ -15,9 +15,9 @@ to_upgrade="${2:-git+https://github.com/mkdocs/mkdocs.git}"
 info_dir="projects/${repo_name/\//--}"
 repo_dir="repos/${repo_name/\//--}"
 
-[[ "$(cat "$info_dir/url.txt")" =~ ^(https://github.com/[^/]+/[^/]+)/raw/([^/]+)/(.+)$ ]]
+[[ "$(head -1 "$info_dir/project.txt")" =~ ^https://github.com/([^/]+/[^/]+)/blob/([^/]+)/(.+)$ ]]
 repo="${BASH_REMATCH[1]}"
-branch="${BASH_REMATCH[2]}"
+commit="${BASH_REMATCH[2]}"
 mkdocs_yml="${BASH_REMATCH[3]}"
 
 
@@ -30,7 +30,7 @@ group() {
 setup() {
     if ! [[ -d "venv" ]]; then
         python -m venv venv
-        venv/bin/pip install -U -r requirements.txt
+        venv/bin/pip install -U beautifulsoup4 virtualenv
     fi
 }
 
@@ -39,7 +39,7 @@ clone_repo() {
     (
         cd "$repo_dir/repo"
         git init -b checkout
-        git fetch --depth=1 "$repo" "$branch"
+        git fetch --depth=1 "https://github.com/$repo" "$commit"
         git reset --hard FETCH_HEAD
     )
     if ! [[ -d "$repo_dir/venv" ]]; then

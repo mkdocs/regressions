@@ -1,1 +1,0 @@
-https://github.com/seleniumbase/SeleniumBase/raw/master/mkdocs.yml

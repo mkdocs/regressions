@@ -1,0 +1,2 @@
+https://github.com/ni/systemlink-operations-handbook/blob/master/mkdocs.yml
+https://github.com/ni/systemlink-operations-handbook/raw/94551b22f75a8e611d013326c73849d22282fb3d/mkdocs.yml

@@ -1,0 +1,2 @@
+https://github.com/nasa-jpl/open-source-rover/blob/master/mkdocs.yml
+https://github.com/nasa-jpl/open-source-rover/raw/8f1b426f64efa581a7fc2d9f95b003a25365796a/mkdocs.yml

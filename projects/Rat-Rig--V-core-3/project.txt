@@ -1,0 +1,2 @@
+https://github.com/Rat-Rig/V-core-3/blob/main/mkdocs.yml
+https://github.com/Rat-Rig/V-core-3/raw/4f5d91f42c9a9f7ec346c73728fa6329491aad8c/mkdocs.yml

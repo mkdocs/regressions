@@ -1,1 +1,0 @@
-https://github.com/crystal-lang/crystal-book/raw/master/mkdocs.yml
