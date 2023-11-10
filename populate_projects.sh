@@ -15,7 +15,7 @@ for d in */; do (
     mkdocs_yml="${BASH_REMATCH[3]}"
   else
     repo="${d//--//}"
-    branch=''
+    branch=$(curl -sfL "https://api.github.com/repos/$repo" | jq -r '.default_branch')
     mkdocs_yml='mkdocs.yml'
   fi
   commit=$(curl -sfL "https://api.github.com/repos/$repo/commits?per_page=1&sha=$branch" | jq -r '.[0].sha')
@@ -26,4 +26,4 @@ for d in */; do (
   mv requirements.in.new requirements.in
 ); done
 
-echo */requirements.in | xargs -t -n1 -P4 pip-compile -q --no-annotate --no-header -U
+echo */requirements.in | xargs -t -n1 -P4 pip-compile -q --allow-unsafe --strip-extras --no-annotate --no-header -U

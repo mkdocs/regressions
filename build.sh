@@ -37,6 +37,7 @@ setup() {
 clone_repo() {
     mkdir -p "$repo_dir/repo"
     (
+        export GIT_LFS_SKIP_SMUDGE=1
         cd "$repo_dir/repo"
         git init -b checkout
         git fetch --depth=1 "https://github.com/$repo" "$commit"
@@ -51,6 +52,9 @@ _build() {
     echo "==== Building $1 ===="
     "$repo_dir/venv/bin/pip" freeze > "$repo_dir/freeze-$1.txt"
     (
+        if grep -q mkdocstrings "$info_dir/requirements.txt"; then
+            export PYTHONPATH="src:.:${PYTHONPATH:+:${PYTHONPATH}}"
+        fi
         cd "$repo_dir/repo"
         ../venv/bin/mkdocs build --no-strict -f "$mkdocs_yml" -d "$(pwd)/../site-$1"
     )
