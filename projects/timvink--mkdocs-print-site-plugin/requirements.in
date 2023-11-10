@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-charts-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-material
+mkdocs-print-site-plugin
+pymdown-extensions

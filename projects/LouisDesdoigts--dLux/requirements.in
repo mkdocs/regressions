@@ -1,0 +1,9 @@
+mkdocs
+mkdocs-autorefs
+mkdocs-jupyter
+mkdocs-material
+mkdocs-same-dir
+mkdocs-simple-plugin
+mkdocstrings
+mkdocstrings-python
+pymdown-extensions

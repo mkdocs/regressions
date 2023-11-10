@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-entangled-plugin
+mkdocs-material
+mkdocstrings
+mkdocstrings-python
+pymdown-extensions

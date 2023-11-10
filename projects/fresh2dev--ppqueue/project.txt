@@ -1,0 +1,2 @@
+https://github.com/fresh2dev/ppqueue/blob/main/config/mkdocs.yml
+https://github.com/fresh2dev/ppqueue/raw/7cf96a7b2110b89df2ae13364943374a299c4e12/config/mkdocs.yml
