@@ -49,3 +49,22 @@ jobs:
       run: ./build.sh build_latest ${{ matrix.repo }} ${{ github.event.inputs.to_upgrade }}
     - name: Compare sites
       run: ./build.sh compare ${{ matrix.repo }}
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout regressions
+      uses: actions/checkout@v4
+      with:
+        path: mkdocs-regressions
+    - name: Checkout catalog
+      uses: actions/checkout@v4
+      with:
+        repository: mkdocs/catalog
+        path: mkdocs-catalog
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Print project coverage
+      run: python mkdocs-regressions/coverage.py
