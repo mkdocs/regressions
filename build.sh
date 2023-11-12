@@ -55,6 +55,9 @@ _build() {
         if grep -q mkdocstrings "$info_dir/requirements.txt"; then
             export PYTHONPATH="src:.:${PYTHONPATH:+:${PYTHONPATH}}"
         fi
+        if grep -q encryptcontent "$info_dir/requirements.txt"; then
+            export MKDOCS_ENCRYPTCONTENT_INSECURE_TEST=true
+        fi
         cd "$repo_dir/repo"
         ../venv/bin/mkdocs build --no-strict -f "$mkdocs_yml" -d "$(pwd)/../site-$1"
     )

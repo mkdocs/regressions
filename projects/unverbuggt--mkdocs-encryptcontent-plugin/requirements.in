@@ -1,0 +1,8 @@
+mkdocs
+git+https://github.com/unverbuggt/mkdocs-encryptcontent-plugin
+mkdocs-include-markdown-plugin
+mkdocs-mermaid2-plugin
+mkdocs-risonia-theme
+mkdocs-simple-hooks
+mkdocs-static-i18n
+pymdown-extensions
