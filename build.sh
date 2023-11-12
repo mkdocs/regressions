@@ -15,7 +15,7 @@ to_upgrade="${2:-git+https://github.com/mkdocs/mkdocs.git}"
 info_dir="projects/${repo_name/\//--}"
 repo_dir="repos/${repo_name/\//--}"
 
-[[ "$(head -1 "$info_dir/project.txt")" =~ ^https://github.com/([^/]+/[^/]+)/blob/([^/]+)/(.+)$ ]]
+[[ "$(tail -1 "$info_dir/project.txt")" =~ ^https://github.com/([^/]+/[^/]+)/raw/([^/]+)/(.+)$ ]]
 repo="${BASH_REMATCH[1]}"
 commit="${BASH_REMATCH[2]}"
 mkdocs_yml="${BASH_REMATCH[3]}"
