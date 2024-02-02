@@ -1,6 +1,6 @@
-markdown-include
 mkdocs
-mkdocs-markdownextradata-plugin
+mkdocs-include-markdown-plugin
+mkdocs-macros-plugin
 mkdocs-material
 mkdocs-redirects
 pymdown-extensions

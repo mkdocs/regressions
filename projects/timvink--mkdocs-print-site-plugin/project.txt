@@ -1,2 +1,2 @@
 https://github.com/timvink/mkdocs-print-site-plugin/blob/master/mkdocs.yml
-https://github.com/timvink/mkdocs-print-site-plugin/raw/32e6b7b9c34dcf69e9a00ea100216a974301d172/mkdocs.yml
+https://github.com/timvink/mkdocs-print-site-plugin/raw/a648cff725d39aea6732164470656fef0571f159/mkdocs.yml

@@ -1,2 +1,2 @@
 https://github.com/segg21/alltheguides/blob/main/mkdocs.yml
-https://github.com/segg21/alltheguides/raw/98b5298147bec35de26ae897ff6f220adcdb1bd2/mkdocs.yml
+https://github.com/segg21/alltheguides/raw/6e9c96ecd3e60c412c8373b570a51ac128d7785b/mkdocs.yml

@@ -3,6 +3,7 @@ mkdocs-abs-rel-plugin
 mkdocs-blogging-plugin
 mkdocs-callouts
 mkdocs-exclude
+mkdocs-glightbox
 mkdocs-material
 mkdocs-redirects
 mkdocs-rss-plugin

@@ -1,2 +1,2 @@
 https://github.com/pypa/setuptools_scm/blob/main/mkdocs.yml
-https://github.com/pypa/setuptools_scm/raw/c39489f9cfced1b584b054564a6579c821db494f/mkdocs.yml
+https://github.com/pypa/setuptools_scm/raw/a23d5fe61d9dc421666d5f23334d454426ad311c/mkdocs.yml

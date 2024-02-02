@@ -1,2 +1,2 @@
 https://github.com/emacs-lsp/lsp-mode/blob/master/mkdocs.yml
-https://github.com/emacs-lsp/lsp-mode/raw/75ea20714635e70ca3da460d1fe558f5057eb373/mkdocs.yml
+https://github.com/emacs-lsp/lsp-mode/raw/b2e54388072e472fa5e873a441a90eaa78062105/mkdocs.yml

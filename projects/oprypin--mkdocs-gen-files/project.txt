@@ -1,2 +1,2 @@
 https://github.com/oprypin/mkdocs-gen-files/blob/master/mkdocs.yml
-https://github.com/oprypin/mkdocs-gen-files/raw/e5cdd6c044c079a4d8c59b73755c00ace97a2325/mkdocs.yml
+https://github.com/oprypin/mkdocs-gen-files/raw/053e3c5e337bc1ebb4c8757f73a2f350178987d9/mkdocs.yml

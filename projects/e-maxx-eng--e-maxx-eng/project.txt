@@ -1,2 +1,0 @@
-https://github.com/e-maxx-eng/e-maxx-eng/blob/master/mkdocs.yml
-https://github.com/e-maxx-eng/e-maxx-eng/raw/86b132438818fdf37fcfaab3e0048663781cc392/mkdocs.yml
