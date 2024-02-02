@@ -28,7 +28,7 @@ jupyterlab-pygments==0.3.0
 jupytext==1.16.1
 markdown==3.5.2
 markdown-it-py==3.0.0
-markupsafe==2.1.4
+markupsafe==2.1.5
 matplotlib-inline==0.1.6
 mdit-py-plugins==0.4.0
 mdurl==0.1.2
