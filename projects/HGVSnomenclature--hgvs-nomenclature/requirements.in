@@ -6,3 +6,5 @@ mkdocs-macros-plugin
 mkdocs-material
 mkdocs-table-reader-plugin
 pymdown-extensions
+gitpython # keep
+pytz # keep

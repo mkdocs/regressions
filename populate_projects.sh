@@ -11,7 +11,7 @@ fi
 
 for d in */; do
   d="${d%/}"
-  pushd "$d"
+  cd "$d"
   printf "%s -> " "$d" >&2
   if [[ -f 'project.txt' ]]; then
     [[ "$(head -1 'project.txt')" =~ ^https://github.com/([^/]+/[^/]+)/blob/([^/]+)/(.+)$ ]]
@@ -29,9 +29,9 @@ for d in */; do
   echo "https://github.com/$repo/blob/$branch/$mkdocs_yml" | tee /dev/stderr >project.txt
   echo "https://github.com/$repo/raw/$commit/$mkdocs_yml" >>project.txt
   tail -1 project.txt | xargs curl -sfL | (mkdocs-get-deps -f - || true) | grep . >requirements.in.new
-  (grep -qE ' ' requirements.in || true) >>requirements.in.new
+  (grep ' ' requirements.in || true) >>requirements.in.new
   mv requirements.in.new requirements.in
-  popd
+  cd ..
   # Rename the directory in case the repository has been renamed
   dir_name="${repo//\//--}"
   if [[ "$d" != "$dir_name" ]]; then
