@@ -4,6 +4,11 @@ set -e -u -o pipefail
 
 cd projects
 
+github_auth=()
+if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+  github_auth=(--header "Authorization: Bearer $GITHUB_TOKEN")
+fi
+
 for d in */; do
   d="${d%/}"
   pushd "$d"
@@ -15,10 +20,10 @@ for d in */; do
     mkdocs_yml="${BASH_REMATCH[3]}"
   else
     repo="${d//--//}"
-    branch=$(curl -sfL "https://api.github.com/repos/$repo" | jq -r '.default_branch')
+    branch=$(curl -sfL "${github_auth[@]}" "https://api.github.com/repos/$repo" | jq -r '.default_branch')
     mkdocs_yml='mkdocs.yml'
   fi
-  [[ "$(curl -sfL "https://api.github.com/repos/$repo/commits?per_page=1&sha=$branch" | jq -r '.[0].commit.url')" =~ ^https://api.github.com/repos/([^/]+/[^/]+)/git/commits/([0-9a-f]+)$ ]]
+  [[ "$(curl -sfL "${github_auth[@]}" "https://api.github.com/repos/$repo/commits?per_page=1&sha=$branch" | jq -r '.[0].commit.url')" =~ ^https://api.github.com/repos/([^/]+/[^/]+)/git/commits/([0-9a-f]+)$ ]]
   repo="${BASH_REMATCH[1]}"
   commit="${BASH_REMATCH[2]}"
   echo "https://github.com/$repo/blob/$branch/$mkdocs_yml" | tee /dev/stderr >project.txt
