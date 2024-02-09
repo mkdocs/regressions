@@ -1,0 +1,7 @@
+mkdocs
+mkdocs-autolinks-plugin
+mkdocs-awesome-pages-plugin
+mkdocs-codeinclude-plugin
+mkdocs-material
+mkdocs-material[imaging]
+pymdown-extensions

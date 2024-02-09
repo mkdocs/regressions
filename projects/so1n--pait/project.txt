@@ -1,0 +1,2 @@
+https://github.com/so1n/pait/blob/master/mkdocs.yml
+https://github.com/so1n/pait/raw/d47ec53a6e496ceeeb1b0f7b030b70829a322067/mkdocs.yml

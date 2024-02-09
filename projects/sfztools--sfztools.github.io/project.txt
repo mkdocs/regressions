@@ -1,0 +1,2 @@
+https://github.com/sfztools/sfztools.github.io/blob/master/mkdocs.yml
+https://github.com/sfztools/sfztools.github.io/raw/19428d9e94719463e4abc69e76a47e7009681f31/mkdocs.yml

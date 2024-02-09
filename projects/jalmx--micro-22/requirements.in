@@ -1,0 +1,5 @@
+mkdocs-markmap
+mkdocs-material
+mkdocs-minify-plugin
+mkdocs[i18n]
+pymdown-extensions

@@ -1,0 +1,2 @@
+https://github.com/ManticoreGamesInc/platform-documentation/blob/development/mkdocs.yml
+https://github.com/ManticoreGamesInc/platform-documentation/raw/bb279a250db0e534e8783917750c779f9f77c01b/mkdocs.yml

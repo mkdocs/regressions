@@ -1,0 +1,12 @@
+markdown-full-yaml-metadata
+mkdocs
+mkdocs-ezlinks-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-glightbox
+mkdocs-material
+mkdocs-meta-descriptions-plugin
+mkdocs-minify-plugin
+mkdocs-redirects
+mkdocs-static-i18n
+pymdown-extensions
+mkdocs-static-i18n <1.0

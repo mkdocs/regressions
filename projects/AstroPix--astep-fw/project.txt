@@ -1,0 +1,2 @@
+https://github.com/AstroPix/astep-fw/blob/main/docs/mkdocs.yml
+https://github.com/AstroPix/astep-fw/raw/840fe6d8b9d07d19560e2d8f2950289a452de406/docs/mkdocs.yml

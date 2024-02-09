@@ -1,0 +1,2 @@
+https://github.com/EddyLuten/bhreia.com/blob/main/mkdocs.yml
+https://github.com/EddyLuten/bhreia.com/raw/19a99f328532b77851cfc003396e575547e85fcb/mkdocs.yml

@@ -1,0 +1,2 @@
+https://github.com/moabukar/Kubernetes-and-Cloud-Native-Associate-KCNA/blob/main/mkdocs.yml
+https://github.com/moabukar/Kubernetes-and-Cloud-Native-Associate-KCNA/raw/2120da9cc15bbe3e9f5dd910860a19545b4d9e96/mkdocs.yml

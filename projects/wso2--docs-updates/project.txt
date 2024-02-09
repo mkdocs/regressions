@@ -1,0 +1,2 @@
+https://github.com/wso2/docs-updates/blob/master/en/mkdocs.yml
+https://github.com/wso2/docs-updates/raw/a6dc1816d811a4e7ce84c83805469fb3da60ae83/en/mkdocs.yml

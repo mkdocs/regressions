@@ -1,2 +1,2 @@
 https://github.com/mitsuhiko/rye/blob/main/mkdocs.yml
-https://github.com/mitsuhiko/rye/raw/3d6403782550c3b9b897b203701cf5e1f09ed20e/mkdocs.yml
+https://github.com/mitsuhiko/rye/raw/62c5394ad65b611e121e0b9158ebf91ec9bf511f/mkdocs.yml

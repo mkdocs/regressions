@@ -1,0 +1,13 @@
+mkdocs
+mkdocs-awesome-pages-plugin
+mkdocs-drawio-file
+mkdocs-exclude
+mkdocs-git-revision-date-plugin
+mkdocs-glightbox
+mkdocs-include-markdown-plugin
+mkdocs-kroki-plugin
+mkdocs-material
+mkdocs-table-reader-plugin
+mkdocstrings
+pymdown-extensions
+mkdocstrings-python # keep

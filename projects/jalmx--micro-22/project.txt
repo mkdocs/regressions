@@ -1,0 +1,2 @@
+https://github.com/jalmx/micro-22/blob/master/mkdocs.yml
+https://github.com/jalmx/micro-22/raw/dc79e2e45aecdcf0616215d8608c8db7da1e1a82/mkdocs.yml

@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-add-number-plugin
+mkdocs-git-revision-date-localized-plugin
+mkdocs-glightbox
+mkdocs-material
+pymdown-extensions

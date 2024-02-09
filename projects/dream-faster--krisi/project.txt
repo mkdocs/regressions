@@ -1,0 +1,2 @@
+https://github.com/dream-faster/krisi/blob/main/mkdocs.yaml
+https://github.com/dream-faster/krisi/raw/0beab0e67e520ffba95a1658cafbc34c45d200df/mkdocs.yaml

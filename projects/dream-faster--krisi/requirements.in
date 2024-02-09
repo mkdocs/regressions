@@ -1,0 +1,10 @@
+mkdocs
+mkdocs-autorefs
+mkdocs-gallery
+mkdocs-glightbox
+mkdocs-include-markdown-plugin
+mkdocs-material
+mkdocstrings
+mkdocstrings-python
+pymdown-extensions
+pillow # keep

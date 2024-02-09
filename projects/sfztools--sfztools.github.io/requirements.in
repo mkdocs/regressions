@@ -1,0 +1,7 @@
+mkdocs
+mkdocs-blogging-plugin
+mkdocs-exclude
+mkdocs-gen-files
+mkdocs-macros-plugin
+pymdown-extensions
+python-frontmatter # keep
