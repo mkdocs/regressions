@@ -1,2 +1,0 @@
-https://github.com/HGVSnomenclature/hgvs-nomenclature/blob/main/mkdocs.yml
-https://github.com/HGVSnomenclature/hgvs-nomenclature/raw/48031034903dceb9cb5da9aebc96bbcd9435f4fb/mkdocs.yml
