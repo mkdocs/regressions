@@ -1,2 +1,2 @@
 https://github.com/JanusGraph/janusgraph/blob/master/mkdocs.yml
-https://github.com/JanusGraph/janusgraph/raw/3df4f040de4575dd7c23687e3318c01057433d11/mkdocs.yml
+https://github.com/JanusGraph/janusgraph/raw/d3c0e11bf1abcbb664fe43e6c7cf616964999433/mkdocs.yml

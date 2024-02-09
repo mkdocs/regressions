@@ -22,4 +22,4 @@ pyyaml-env-tag==0.1
 six==1.16.0
 smmap==5.0.1
 termcolor==2.4.0
-watchdog==3.0.0
+watchdog==4.0.0

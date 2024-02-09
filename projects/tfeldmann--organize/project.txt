@@ -1,2 +1,2 @@
 https://github.com/tfeldmann/organize/blob/main/mkdocs.yml
-https://github.com/tfeldmann/organize/raw/eeb68c5288d5c3a6b3b5891c9c2389588f2cb503/mkdocs.yml
+https://github.com/tfeldmann/organize/raw/6fed350a6c4dad9c4bdc505c63c8ba18f07108b1/mkdocs.yml
